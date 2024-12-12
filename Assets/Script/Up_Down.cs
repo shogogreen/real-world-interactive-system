@@ -49,7 +49,7 @@ public class Up_Down : MonoBehaviour
 
     IEnumerator LightUpImages()
     {
-        /*int index = 0;
+        int index = 0;
         while (!isStopped)
         {
             // 現在の画像を点灯
@@ -63,8 +63,8 @@ public class Up_Down : MonoBehaviour
                 images[index].color = inactiveColor;
                 index = (index + 1) % images.Length; // 次の画像へ
             }
-        }*/
-        while (true)
+        }
+        /*while (true)
         {
             foreach (Image img in images)
             {
@@ -72,6 +72,36 @@ public class Up_Down : MonoBehaviour
                 yield return new WaitForSeconds(lightDuration); // 一定時間待機
                 img.color = inactiveColor; // 画像を消灯
             }
+        }*/
+    }
+
+    public void StopLighting()
+    {
+        if (lightingCoroutine != null)
+        {
+            isStopped = true; // 停止状態を設定
+            StopCoroutine(lightingCoroutine); // コルーチンを停止
+            lightingCoroutine = null;
+        }
+    }
+
+    public void ResumeLighting()
+    {
+        if (isStopped)
+        {
+            // 全てのマスを消灯
+            ResetAllImages();
+
+            isStopped = false;
+            lightingCoroutine = StartCoroutine(LightUpImages());
+        }
+    }
+
+    private void ResetAllImages()
+    {
+        foreach (Image img in images)
+        {
+            img.color = inactiveColor; // 消灯色に設定
         }
     }
 

@@ -32,7 +32,7 @@ public class Up_Down : MonoBehaviour
     public Color inactiveColor = Color.white; // 消灯時の色
 
     private Coroutine lightingCoroutine; // 現在のコルーチンを保存
-    private bool isStopped = false; // 停止状態を管理
+    private bool isStopped = true; // 停止状態を管理
 
     // Start is called before the first frame update
     void Start()

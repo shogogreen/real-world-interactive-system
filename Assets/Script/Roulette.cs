@@ -11,6 +11,8 @@ public class Roulette : MonoBehaviour
     public GameObject pink;
     public GameObject red;
     public GameObject green;
+    public GameObject updown;
+    private Up_Down upDownScript;
 
     public GameObject[] separateds; // 画像を順番に格納する配列
     public float lightDuration = 0.05f; // 点灯する時間
@@ -23,6 +25,7 @@ public class Roulette : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        upDownScript = updown.GetComponent<Up_Down>();
         separateds = new GameObject[]
         {
             blue, lightblue, yellow, pink, red, green
@@ -66,11 +69,13 @@ public class Roulette : MonoBehaviour
             isStopped = true; // 停止状態を設定
             StopCoroutine(lightingCoroutine); // コルーチンを停止
             lightingCoroutine = null;
+            upDownScript.ResumeLighting();
         }
     }
 
     public void ResumeLighting()
     {
+        upDownScript.StopLighting();
         if (isStopped)
         {
             // 全てのマスを消灯

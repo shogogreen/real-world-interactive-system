@@ -6,37 +6,47 @@ public class Up_Down_Control : MonoBehaviour
 {
     //public GameObject stick;
     public float moveSpeed = 1f; // 上方向の移動速度
-    public float moveDistance = 10f; // 上方向の移動距離
+    public float Distance = 0.95f; // 上方向の移動距離
 
-    private Vector3 startPosition;
     private bool isMoving = false;
 
     void Start()
     {
-        startPosition = transform.position; // 初期位置を保存
-        StartMoving();
+
     }
 
-    public void StartMoving()
+    public void StartMoving(GameObject targetObject, float Distance)
     {
         if (!isMoving)
         {
-            StartCoroutine(MoveUpCoroutine());
+            StartCoroutine(MoveUpCoroutine(targetObject, Distance));
         }
     }
 
-    IEnumerator MoveUpCoroutine()
+    IEnumerator MoveUpCoroutine(GameObject targetObject, float Distance)
     {
         isMoving = true;
         float movedDistance = 0f;
-
-        while (movedDistance < moveDistance)
+        if (Distance > 0)
         {
-            float step = moveSpeed * Time.deltaTime; // 1フレームの移動量
-            transform.Translate(Vector3.down * step); // 上方向に移動
-            movedDistance += step; // 移動距離を累積
-            yield return null; // 次のフレームまで待機
+            while (movedDistance < Distance)
+            {
+                float step = moveSpeed * Time.deltaTime; // 1フレームの移動量
+                targetObject.transform.Translate(Vector3.down * step); // 上方向に移動
+                movedDistance += step; // 移動距離を累積
+                yield return null; // 次のフレームまで待機
+            }
+        } else
+        {
+            while (movedDistance < -Distance)
+            {
+                float step = moveSpeed * Time.deltaTime; // 1フレームの移動量
+                targetObject.transform.Translate(Vector3.up * step); // 下方向に移動
+                movedDistance += step; // 移動距離を累積
+                yield return null; // 次のフレームまで待機
+            }
         }
+        
 
         isMoving = false; // 移動完了
     }

@@ -25,6 +25,17 @@ public class Up_Down : MonoBehaviour
     public Image down_meter_batsu_2;
     public Image down_meter_1_4;
     public Image down_meter_1_5;
+    public GameObject roulette;
+    private Roulette rouletteScript;
+    public GameObject upDownControl;
+    private Up_Down_Control upDownControlScript;
+    public GameObject blue;
+    public GameObject light_blue;
+    public GameObject yellow;
+    public GameObject pink;
+    public GameObject red;
+    public GameObject green;
+    public GameObject[] sticks; // オブジェクトを順番に格納する配列
 
     public Image[] images; // 画像を順番に格納する配列
     public float lightDuration = 0.05f; // 点灯する時間
@@ -37,6 +48,12 @@ public class Up_Down : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rouletteScript = roulette.GetComponent<Roulette>();
+        upDownControlScript = upDownControl.GetComponent<Up_Down_Control>();
+        sticks = new GameObject[]
+        {
+            blue, light_blue, yellow, pink, red, green
+        };
         images = new Image[]
         {
             up_meter_1_1, up_meter_1_2, up_meter_1_3, up_meter_2, up_meter_3, up_meter_batsu_1, up_meter_4, up_meter_batsu_2, up_meter_1_4, up_meter_1_5,
@@ -82,6 +99,7 @@ public class Up_Down : MonoBehaviour
             isStopped = true; // 停止状態を設定
             StopCoroutine(lightingCoroutine); // コルーチンを停止
             lightingCoroutine = null;
+            upDownControlScript.StartMoving(sticks[rouletteScript.RouletteIndex], 0.95f);
         }
     }
 

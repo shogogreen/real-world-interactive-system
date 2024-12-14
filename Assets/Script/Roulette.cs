@@ -13,8 +13,9 @@ public class Roulette : MonoBehaviour
     public GameObject green;
     public GameObject updown;
     private Up_Down upDownScript;
+    public int RouletteIndex;
 
-    public GameObject[] separateds; // 画像を順番に格納する配列
+    public GameObject[] separateds; // オブジェクトを順番に格納する配列
     public float lightDuration = 0.05f; // 点灯する時間
     public Color activeColor = Color.yellow; // 点灯時の色
     private Color inactiveColor; // 消灯時の色
@@ -41,6 +42,7 @@ public class Roulette : MonoBehaviour
         {
             // 現在の画像を点灯
             separateds[index].GetComponent<Renderer>().material.color = activeColor;
+            RouletteIndex = index;
 
             yield return new WaitForSeconds(lightDuration);
 

@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StickGo.unity
+    guid: a80ea6b7d301ec54fbefbf4e5a101784
   m_configObjects: {}

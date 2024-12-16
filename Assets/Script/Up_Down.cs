@@ -35,17 +35,17 @@ public class Up_Down : MonoBehaviour
     public GameObject pink;
     public GameObject red;
     public GameObject green;
-    public GameObject[] sticks; // �I�u�W�F�N�g�����ԂɊi�[����z��
+    public GameObject[] sticks; // オブジェクトを順番に格納する配列
     public int[] moveDistance;
     public int UpDownIndex;
 
-    public Image[] images; // �摜�����ԂɊi�[����z��
-    public float lightDuration = 0.05f; // �_�����鎞��
-    public Color activeColor = Color.yellow; // �_�����̐F
-    public Color inactiveColor = Color.white; // �������̐F
+    public Image[] images; // 画像を順番に格納する配列
+    public float lightDuration = 0.05f; // 点灯する時間
+    public Color activeColor = Color.yellow; // 点灯時の色
+    public Color inactiveColor = Color.white; // 消灯時の色
 
-    private Coroutine lightingCoroutine; // ���݂̃R���[�`����ۑ�
-    private bool isStopped = true; // ��~��Ԃ��Ǘ�
+    private Coroutine lightingCoroutine; // 現在のコルーチンを保存
+    private bool isStopped = true; // 停止状態を管理
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +65,10 @@ public class Up_Down : MonoBehaviour
         };
         moveDistance = new int[]
         {
-            1, 1, 1, 2, 3, -1, 4, -1, 1, 1, 1, -1, 4, -1, 3, 2, 1, 1, 1, -1, -1, -1, -2, -3, 1, -4, 1, -1, -1, -1, 1, -4, 1, -3, -2, -1, -1, -1
+            1, 1, 1, 2, 3, -1, 4, -1, 1, 1, 
+            1, -1, 4, -1, 3, 2, 1, 1, 1, 
+            -1, -1, -1, -2, -3, 1, -4, 1, -1, -1, 
+            -1, 1, -4, 1, -3, -2, -1, -1, -1
         };
 
         lightingCoroutine = StartCoroutine(LightUpImages());
@@ -76,25 +79,25 @@ public class Up_Down : MonoBehaviour
         int index = 0;
         while (!isStopped)
         {
-            // ���݂̉摜��_��
+            // 現在の画像を点灯
             images[index].color = activeColor;
             UpDownIndex = index;
             yield return new WaitForSeconds(lightDuration);
 
-            // �_����Ԃ����Z�b�g�i��~����Ă��Ȃ��ꍇ�̂݁j
+            // 点灯状態をリセット（停止されていない場合のみ）
             if (!isStopped)
             {
                 images[index].color = inactiveColor;
-                index = (index + 1) % images.Length; // ���̉摜��
+                index = (index + 1) % images.Length; // 次の画像へ
             }
         }
         /*while (true)
         {
             foreach (Image img in images)
             {
-                img.color = activeColor; // �摜��_��
-                yield return new WaitForSeconds(lightDuration); // ��莞�ԑҋ@
-                img.color = inactiveColor; // �摜������
+                img.color = activeColor; // 画像を点灯
+                yield return new WaitForSeconds(lightDuration); // 一定時間待機
+                img.color = inactiveColor; // 画像を消灯
             }
         }*/
     }
@@ -103,8 +106,8 @@ public class Up_Down : MonoBehaviour
     {
         if (lightingCoroutine != null)
         {
-            isStopped = true; // ��~��Ԃ�ݒ�
-            StopCoroutine(lightingCoroutine); // �R���[�`�����~
+            isStopped = true; // 停止状態を設定
+            StopCoroutine(lightingCoroutine); // コルーチンを停止
             lightingCoroutine = null;
             Debug.Log(moveDistance);
             upDownControlScript.StartMoving(sticks[rouletteScript.RouletteIndex], 0.475f * moveDistance[UpDownIndex%moveDistance.Length]);
@@ -116,7 +119,7 @@ public class Up_Down : MonoBehaviour
     {
         if (isStopped)
         {
-            // �S�Ẵ}�X������
+            // 全てのマスを消灯
             ResetAllImages();
 
             isStopped = false;
@@ -128,7 +131,7 @@ public class Up_Down : MonoBehaviour
     {
         foreach (Image img in images)
         {
-            img.color = inactiveColor; // �����F�ɐݒ�
+            img.color = inactiveColor; // 消灯色に設定
         }
     }
 

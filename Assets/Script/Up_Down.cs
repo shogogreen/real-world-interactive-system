@@ -38,6 +38,7 @@ public class Up_Down : MonoBehaviour
     public GameObject[] sticks; // オブジェクトを順番に格納する配列
     public int[] moveDistance;
     public int UpDownIndex;
+    public int[] movedDistance; // 現在の位置
 
     public Image[] images; // 画像を順番に格納する配列
     public float lightDuration = 0.05f; // 点灯する時間
@@ -69,6 +70,10 @@ public class Up_Down : MonoBehaviour
             1, -1, 4, -1, 3, 2, 1, 1, 1, 
             -1, -1, -1, -2, -3, 1, -4, 1, -1, -1, 
             -1, 1, -4, 1, -3, -2, -1, -1, -1
+        };
+        movedDistance = new int[]
+        {
+            0, 0, 0, 0, 0, 0
         };
 
         lightingCoroutine = StartCoroutine(LightUpImages());
@@ -109,9 +114,18 @@ public class Up_Down : MonoBehaviour
             isStopped = true; // 停止状態を設定
             StopCoroutine(lightingCoroutine); // コルーチンを停止
             lightingCoroutine = null;
-            Debug.Log(moveDistance);
-            upDownControlScript.StartMoving(sticks[rouletteScript.RouletteIndex], 0.475f * moveDistance[UpDownIndex%moveDistance.Length]);
-            
+            int currentPostion = movedDistance[rouletteScript.RouletteIndex];
+            int distance = moveDistance[UpDownIndex % moveDistance.Length];
+            if (currentPostion + distance > 8)
+            {
+                distance = 8 - currentPostion;
+            }else if (currentPostion + distance < -8)
+            {
+                distance = -8 - currentPostion;
+            }
+            upDownControlScript.StartMoving(sticks[rouletteScript.RouletteIndex], 0.475f * distance);
+            Debug.Log(0.475f * distance);
+            movedDistance[rouletteScript.RouletteIndex] += distance;
         }
     }
 

@@ -35,15 +35,17 @@ public class Up_Down : MonoBehaviour
     public GameObject pink;
     public GameObject red;
     public GameObject green;
-    public GameObject[] sticks; // ƒIƒuƒWƒFƒNƒg‚ğ‡”Ô‚ÉŠi”[‚·‚é”z—ñ
+    public GameObject[] sticks; // ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ÉŠiï¿½[ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½
+    public int[] moveDistance;
+    public int UpDownIndex;
 
-    public Image[] images; // ‰æ‘œ‚ğ‡”Ô‚ÉŠi”[‚·‚é”z—ñ
-    public float lightDuration = 0.05f; // “_“”‚·‚éŠÔ
-    public Color activeColor = Color.yellow; // “_“”‚ÌF
-    public Color inactiveColor = Color.white; // Á“”‚ÌF
+    public Image[] images; // ï¿½æ‘œï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ÉŠiï¿½[ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½
+    public float lightDuration = 0.05f; // ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½éï¿½ï¿½
+    public Color activeColor = Color.yellow; // ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ÌF
+    public Color inactiveColor = Color.white; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌF
 
-    private Coroutine lightingCoroutine; // Œ»İ‚ÌƒRƒ‹[ƒ`ƒ“‚ğ•Û‘¶
-    private bool isStopped = true; // ’â~ó‘Ô‚ğŠÇ—
+    private Coroutine lightingCoroutine; // ï¿½ï¿½ï¿½İ‚ÌƒRï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½ï¿½Û‘ï¿½
+    private bool isStopped = true; // ï¿½ï¿½~ï¿½ï¿½Ô‚ï¿½ï¿½Ç—ï¿½
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +63,11 @@ public class Up_Down : MonoBehaviour
             down_meter_1_1, down_meter_1_2, down_meter_1_3, down_meter_2, down_meter_3, down_meter_batsu_1, down_meter_4, down_meter_batsu_2, down_meter_1_4, down_meter_1_5,
             down_meter_1_4, down_meter_batsu_2, down_meter_4, down_meter_batsu_1, down_meter_3, down_meter_2, down_meter_1_3, down_meter_1_2, down_meter_1_1
         };
+        moveDistance = new int[]
+        {
+            1, 1, 1, 2, 3, -1, 4, -1, 1, 1, 1, -1, 4, -1, 3, 2, 1, 1, 1, -1, -1, -1, -2, -3, 1, -4, 1, -1, -1, -1, 1, -4, 1, -3, -2, -1, -1, -1
+        };
+
         lightingCoroutine = StartCoroutine(LightUpImages());
     }
 
@@ -69,25 +76,25 @@ public class Up_Down : MonoBehaviour
         int index = 0;
         while (!isStopped)
         {
-            // Œ»İ‚Ì‰æ‘œ‚ğ“_“”
+            // ï¿½ï¿½ï¿½İ‚Ì‰æ‘œï¿½ï¿½_ï¿½ï¿½
             images[index].color = activeColor;
-
+            UpDownIndex = index;
             yield return new WaitForSeconds(lightDuration);
 
-            // “_“”ó‘Ô‚ğƒŠƒZƒbƒgi’â~‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Ì‚İj
+            // ï¿½_ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½iï¿½ï¿½~ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Ì‚İj
             if (!isStopped)
             {
                 images[index].color = inactiveColor;
-                index = (index + 1) % images.Length; // Ÿ‚Ì‰æ‘œ‚Ö
+                index = (index + 1) % images.Length; // ï¿½ï¿½ï¿½Ì‰æ‘œï¿½ï¿½
             }
         }
         /*while (true)
         {
             foreach (Image img in images)
             {
-                img.color = activeColor; // ‰æ‘œ‚ğ“_“”
-                yield return new WaitForSeconds(lightDuration); // ˆê’èŠÔ‘Ò‹@
-                img.color = inactiveColor; // ‰æ‘œ‚ğÁ“”
+                img.color = activeColor; // ï¿½æ‘œï¿½ï¿½_ï¿½ï¿½
+                yield return new WaitForSeconds(lightDuration); // ï¿½ï¿½èï¿½Ô‘Ò‹@
+                img.color = inactiveColor; // ï¿½æ‘œï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
         }*/
     }
@@ -96,10 +103,12 @@ public class Up_Down : MonoBehaviour
     {
         if (lightingCoroutine != null)
         {
-            isStopped = true; // ’â~ó‘Ô‚ğİ’è
-            StopCoroutine(lightingCoroutine); // ƒRƒ‹[ƒ`ƒ“‚ğ’â~
+            isStopped = true; // ï¿½ï¿½~ï¿½ï¿½Ô‚ï¿½İ’ï¿½
+            StopCoroutine(lightingCoroutine); // ï¿½Rï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½~
             lightingCoroutine = null;
-            upDownControlScript.StartMoving(sticks[rouletteScript.RouletteIndex], 0.95f);
+            Debug.Log(moveDistance);
+            upDownControlScript.StartMoving(sticks[rouletteScript.RouletteIndex], 0.475f * moveDistance[UpDownIndex%moveDistance.Length]);
+            
         }
     }
 
@@ -107,7 +116,7 @@ public class Up_Down : MonoBehaviour
     {
         if (isStopped)
         {
-            // ‘S‚Ä‚Ìƒ}ƒX‚ğÁ“”
+            // ï¿½Sï¿½Ä‚Ìƒ}ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             ResetAllImages();
 
             isStopped = false;
@@ -119,7 +128,7 @@ public class Up_Down : MonoBehaviour
     {
         foreach (Image img in images)
         {
-            img.color = inactiveColor; // Á“”F‚Éİ’è
+            img.color = inactiveColor; // ï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½Éİ’ï¿½
         }
     }
 

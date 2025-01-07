@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private Vector3 rotationCenter = new Vector3(0f, 20f, -7.5f); // 回転の中心
     private bool isDragging = false; // ドラッグ中かどうか
     private Vector3 previousMousePosition; // ドラッグ開始時のマウス位置
-    private float currentAngle = 0f; // 累積の回転角度
+    private float currentAngle = 0f; // 回転角度
 
     void Update()
     {

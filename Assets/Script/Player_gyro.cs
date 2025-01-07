@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player_gyro : MonoBehaviour
 {
-    private Vector3 rotationCenter = new Vector3(0f, 20f, -7.5f); // ‰ñ“]‚Ì’†S
+    private Vector3 rotationCenter = new Vector3(0f, 25.8f, -7.5f); // ‰ñ“]‚Ì’†S
     private Quaternion q;
     private Quaternion newQ;
     private Vector3 eulerAngles;

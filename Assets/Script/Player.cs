@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float rotationSpeed = 0.01f; // 回転速度
-    private Vector3 rotationCenter = new Vector3(0f, 20f, -7.5f); // 回転の中心
+    private float rotationSpeed = 0.1f; // 回転速度
+    private Vector3 rotationCenter = new Vector3(0f, 25.8f, -7.5f); // 回転の中心
     private bool isDragging = false; // ドラッグ中かどうか
     private Vector3 previousMousePosition; // ドラッグ開始時のマウス位置
     private float currentAngle = 0f; // 回転角度

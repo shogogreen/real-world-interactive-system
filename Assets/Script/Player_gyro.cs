@@ -11,6 +11,7 @@ public class Player_gyro : MonoBehaviour
     private float yAngle;
     private float currentAngle = 0f; // ‰ñ“]Šp“x
     private float prevyAngle = 0f;
+    private int count = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,9 @@ public class Player_gyro : MonoBehaviour
         q = Input.gyro.attitude;
         newQ = new Quaternion(-q.x, -q.z, -q.y, q.w) * Quaternion.Euler(90f, 0f, 0f);
         eulerAngles = newQ.eulerAngles;
+        yAngle = eulerAngles.y;
         prevyAngle = eulerAngles.y;
+        currentAngle = 0f;
     }
 
     // Update is called once per frame
@@ -30,6 +33,11 @@ public class Player_gyro : MonoBehaviour
         eulerAngles = newQ.eulerAngles;
         yAngle = eulerAngles.y;
         currentAngle = yAngle - prevyAngle;
+        if (count < 30)
+        {
+            currentAngle = 0f;
+            count++;
+        }
         // ‰ñ“]‚Ì’†S‚©‚ç‚Ì•ûŒüƒxƒNƒgƒ‹‚ðŒvŽZ
         Vector3 direction = transform.position - rotationCenter;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float rotationSpeed = 0.001f; // 回転速度
+    private float rotationSpeed = 0.01f; // 回転速度
     private Vector3 rotationCenter = new Vector3(0f, 20f, -7.5f); // 回転の中心
     private bool isDragging = false; // ドラッグ中かどうか
     private Vector3 previousMousePosition; // ドラッグ開始時のマウス位置
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
+            currentAngle = 0f;
         }
 
         // ドラッグ中にPlayerオブジェクトを回転
@@ -35,8 +36,8 @@ public class Player : MonoBehaviour
             if (deltaMousePosition.magnitude > Mathf.Epsilon)
             {
                 // X方向のドラッグ量に応じて回転角度を計算
-                float rotationAmount = deltaMousePosition.x * rotationSpeed * 0.0001f;
-                currentAngle += rotationAmount; // 累積の回転量を更新
+                float rotationAmount = deltaMousePosition.x * rotationSpeed;
+                currentAngle = rotationAmount; // 累積の回転量を更新
 
                 // Playerオブジェクトを回転
                 RotatePlayer();

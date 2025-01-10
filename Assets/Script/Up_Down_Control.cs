@@ -25,6 +25,7 @@ public class Up_Down_Control : MonoBehaviour
 
     IEnumerator MoveUpCoroutine(GameObject targetObject, float Distance)
     {
+        Rigidbody rb = targetObject.GetComponent<Rigidbody>();
         isMoving = true;
         float movedDistance = 0f;
         if (Distance > 0)
@@ -32,7 +33,9 @@ public class Up_Down_Control : MonoBehaviour
             while (movedDistance < Distance)
             {
                 float step = moveSpeed * Time.deltaTime; // 1フレームの移動量
-                targetObject.transform.Translate(Vector3.down * step); // 上方向に移動
+                Vector3 newPosition = rb.position + Vector3.up * step;
+                rb.MovePosition(newPosition);  // 上方向に移動
+                //targetObject.transform.Translate(Vector3.down * step); // 上方向に移動
                 movedDistance += step; // 移動距離を累積
                 yield return null; // 次のフレームまで待機
             }
@@ -41,7 +44,9 @@ public class Up_Down_Control : MonoBehaviour
             while (movedDistance < -Distance)
             {
                 float step = moveSpeed * Time.deltaTime; // 1フレームの移動量
-                targetObject.transform.Translate(Vector3.up * step); // 下方向に移動
+                Vector3 newPosition = rb.position + Vector3.down * step;
+                rb.MovePosition(newPosition);  // 下方向に移動
+                //targetObject.transform.Translate(Vector3.up * step); // 下方向に移動
                 movedDistance += step; // 移動距離を累積
                 yield return null; // 次のフレームまで待機
             }

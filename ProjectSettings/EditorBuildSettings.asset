@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: dee0ca89c039744d6b1367aac9bac647
+  - enabled: 1
     path: Assets/Scenes/StickGo.unity
     guid: a80ea6b7d301ec54fbefbf4e5a101784
+  - enabled: 1
+    path: Assets/Scenes/HowToPlay.unity
+    guid: 67442b2aa953d4b288204c6af186dc66
   m_configObjects: {}

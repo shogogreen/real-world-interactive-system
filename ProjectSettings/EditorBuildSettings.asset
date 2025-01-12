@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/StickGo.unity
     guid: a80ea6b7d301ec54fbefbf4e5a101784
   - enabled: 1
-    path: Assets/Scenes/HowToPlay.unity
+    path: Assets/Scenes/HowToPlay1.unity
     guid: 67442b2aa953d4b288204c6af186dc66
+  - enabled: 1
+    path: Assets/Scenes/HowToPlay2.unity
+    guid: 0e7b956fadfcc488c950e0dc05a24583
   m_configObjects: {}

@@ -31,6 +31,11 @@ public class ButtonTransition : MonoBehaviour
 
     public void SwitchToHow()
     {
-        SceneManager.LoadScene("HowToPlay", LoadSceneMode.Single);
+        SceneManager.LoadScene("HowToPlay1", LoadSceneMode.Single);
+    }
+
+    public void SwitchToHow2()
+    {
+        SceneManager.LoadScene("HowToPlay2", LoadSceneMode.Single);
     }
 }

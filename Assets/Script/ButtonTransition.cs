@@ -23,6 +23,21 @@ public class ButtonTransition : MonoBehaviour
         SceneManager.LoadScene("StickGo", LoadSceneMode.Single);
     }
 
+    public void SwitchToGameRabbit()
+    {
+        SceneManager.LoadScene("StickGo_rabbit", LoadSceneMode.Single);
+    }
+
+    public void SwitchToGamePumpkin()
+    {
+        SceneManager.LoadScene("StickGo_pumpkin", LoadSceneMode.Single);
+    }
+
+    public void SwitchToGameEgg()
+    {
+        SceneManager.LoadScene("StickGo_egg", LoadSceneMode.Single);
+    }
+
     public void SwitchToStart()
     {
         Debug.Log("ボタンが押されました。シーン遷移を開始します。");

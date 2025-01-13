@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Collection.unity
     guid: 98110d911f2ce4309b128a9e7f1c87e7
+  - enabled: 1
+    path: Assets/Scenes/StickGo_rabbit.unity
+    guid: 3dd8f3301f5103a48a30db64efc0c8aa
+  - enabled: 1
+    path: Assets/Scenes/StickGo_pumpkin.unity
+    guid: 9f77d1e781b30df4c82c1545c695f4e0
+  - enabled: 1
+    path: Assets/Scenes/StickGo_egg.unity
+    guid: 87d3f6bedf62d784cadb8ed5ef970f11
   m_configObjects: {}

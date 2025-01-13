@@ -20,42 +20,66 @@ public class ButtonTransition : MonoBehaviour
 
     public void SwitchToGame()
     {
-        SceneManager.LoadScene("StickGo", LoadSceneMode.Single);
+        StartCoroutine(PlaySEAndSwitchScene("StickGo"));
     }
 
     public void SwitchToGameRabbit()
     {
-        SceneManager.LoadScene("StickGo_rabbit", LoadSceneMode.Single);
+        StartCoroutine(PlaySEAndSwitchScene("StickGo_rabbit"));
     }
 
     public void SwitchToGamePumpkin()
     {
-        SceneManager.LoadScene("StickGo_pumpkin", LoadSceneMode.Single);
+        StartCoroutine(PlaySEAndSwitchScene("StickGo_pumpkin"));
     }
 
     public void SwitchToGameEgg()
     {
-        SceneManager.LoadScene("StickGo_egg", LoadSceneMode.Single);
+        StartCoroutine(PlaySEAndSwitchScene("StickGo_egg"));
     }
 
     public void SwitchToStart()
     {
-        Debug.Log("ボタンが押されました。シーン遷移を開始します。");
-        SceneManager.LoadScene("Start", LoadSceneMode.Single);
+        StartCoroutine(PlaySEAndSwitchScene("Start"));
     }
 
     public void SwitchToHow()
     {
-        SceneManager.LoadScene("HowToPlay1", LoadSceneMode.Single);
+        StartCoroutine(PlaySEAndSwitchScene("HowToPlay1"));
     }
 
     public void SwitchToHow2()
     {
-        SceneManager.LoadScene("HowToPlay2", LoadSceneMode.Single);
+        StartCoroutine(PlaySEAndSwitchScene("HowToPlay2"));
     }
 
     public void SwitchToCol()
     {
-        SceneManager.LoadScene("Collection", LoadSceneMode.Single);
+        StartCoroutine(PlaySEAndSwitchScene("Collection"));
+    }
+
+    private void PlaySE()
+    {
+        if (SeManager.Instance != null)
+        {
+            SeManager.Instance.SettingPlaySE(); // 効果音を再生
+        }
+        else
+        {
+            Debug.LogError("SeManager Error");
+        }
+    }
+    private IEnumerator PlaySEAndSwitchScene(string sceneName)
+    {
+        if (SeManager.Instance != null)
+        {
+            SeManager.Instance.SettingPlaySE(); // 効果音を再生
+        }
+
+        // 効果音の長さ分待つ (または適当に 0.5 秒程度)
+        yield return new WaitForSeconds(0.5f);
+
+        // シーンを遷移
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }

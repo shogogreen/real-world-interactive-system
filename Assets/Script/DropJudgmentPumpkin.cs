@@ -31,7 +31,6 @@ public class DropJudgmentPumpkin : MonoBehaviour
         }
         if (other.gameObject.name == "NextStage")
         {
-            Destroy(gameObject);
             buttonTransition = GetComponent<ButtonTransition>();
             buttonTransition.SwitchToGameEgg();
         }

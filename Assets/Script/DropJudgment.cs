@@ -31,7 +31,6 @@ public class DropJudgment : MonoBehaviour
         }
         if (other.gameObject.name == "NextStage")
         {
-            Destroy(gameObject);
             buttonTransition = GetComponent<ButtonTransition>();
             buttonTransition.SwitchToGameRabbit();
         }

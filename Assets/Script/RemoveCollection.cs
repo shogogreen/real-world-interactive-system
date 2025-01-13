@@ -9,6 +9,9 @@ public class RemoveCollection : MonoBehaviour
     {
         CollectionManager collectionManager = FindObjectOfType<CollectionManager>();
         collectionManager.RemoveFromCollection("Bear");
+        collectionManager.RemoveFromCollection("Rabbit");
+        collectionManager.RemoveFromCollection("Pumpkin");
+        collectionManager.RemoveFromCollection("Egg");
     }
 
     // Update is called once per frame

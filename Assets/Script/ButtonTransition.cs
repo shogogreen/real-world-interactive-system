@@ -38,4 +38,9 @@ public class ButtonTransition : MonoBehaviour
     {
         SceneManager.LoadScene("HowToPlay2", LoadSceneMode.Single);
     }
+
+    public void SwitchToCol()
+    {
+        SceneManager.LoadScene("Collection", LoadSceneMode.Single);
+    }
 }
